@@ -1,0 +1,13 @@
+package xyz.tjucomments.tjucommentv1;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class TjucommentV1ApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
