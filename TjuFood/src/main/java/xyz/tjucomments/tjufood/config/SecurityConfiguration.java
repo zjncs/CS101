@@ -21,16 +21,12 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import xyz.tjucomments.tjufood.entity.RestBean;
-import xyz.tjucomments.tjufood.service.AuthorService;
 
 import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
-    @Resource
-    AuthorService authorService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -53,14 +49,6 @@ public class SecurityConfiguration {
                 .build();
 
     }
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity security) throws Exception {
-        return security
-                .getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(authorService)
-                .and()
-                .build();
-    }
 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setCharacterEncoding("utf-8");
@@ -68,10 +56,6 @@ public class SecurityConfiguration {
             response.getWriter().write(JSONObject.toJSONString(RestBean.success("恭喜你成功登录天大点评！！！")));
         else if(request.getRequestURI().endsWith("/logout"))
             response.getWriter().write(JSONObject.toJSONString(RestBean.success("退出登录成功")));
-    }
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
     }
 
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
