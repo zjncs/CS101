@@ -4,5 +4,24 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/tju_food?useUnicode=true&characterEncoding=utf-8
     username: root
     password: zjn041222
+  mail:
+    host: smtp.163.com
+    username: 18910855655@163.com
+    password: KF38MA279yU9xmwT
+    port: 465
+    properties:
+      from: 18910855655@163.com
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  data:
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      password:
+
+
 server:
   port: 8083
