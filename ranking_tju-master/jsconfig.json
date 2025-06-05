@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "paths": {
       "@/*": [
-        "programe/WebFront/src/*"
+        "src/*"
       ]
     },
     "lib": [
