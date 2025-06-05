@@ -72,3 +72,21 @@ Follow the existing pattern in `AuthorService` and `UserMapper`.
 3. Write unit tests under `src/test/java` to ensure new services function with
    Spring Boot 3.
 
+
+## 8. Example Endpoints
+
+Below are example REST endpoints for newly introduced modules. These follow the same `RestBean` response style as existing controllers.
+
+### BlogController
+- `GET /api/blog/latest` – List recent blogs for the homepage.
+- `GET /api/blog/{id}` – Fetch a blog by ID including basic fields.
+
+### ReviewController
+- `GET /api/review/dish/{dishId}` – List reviews for a specific dish.
+- `GET /api/review/{id}` – Retrieve single review details.
+
+### CommentController
+- `GET /api/comment/blog/{blogId}` – List top-level comments under a blog.
+- `GET /api/comment/review/{reviewId}` – List top-level comments under a review.
+
+These basic endpoints demonstrate read-only access. Additional POST or PUT routes can be added later for creating new blogs, reviews and comments with authentication checks.
