@@ -22,12 +22,31 @@
 
           <div class="form-group">
             <label for="email" class="form-label">邮箱</label>
+            <div class="code-row">
+              <input
+                  type="email"
+                  id="email"
+                  v-model="email"
+                  class="form-input"
+                  placeholder="请输入邮箱"
+                  required
+              />
+              <button
+                  type="button"
+                  class="code-btn"
+                  @click="sendCode"
+              >{{ codeButtonText }}</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="code" class="form-label">邮箱验证码</label>
             <input
-                type="email"
-                id="email"
-                v-model="email"
+                type="text"
+                id="code"
+                v-model="code"
                 class="form-input"
-                placeholder="请输入邮箱"
+                placeholder="请输入验证码"
                 required
             />
           </div>
@@ -107,13 +126,41 @@ const authStore = useAuthStore()
 
 const username = ref('')
 const email = ref('')
+const code = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 const campus = ref('')
 const agreement = ref(false)
 const errorMessage = ref('')
+const codeButtonText = ref('发送验证码')
+let countdown = 0
 
-function handleRegister() {
+function updateCountdown() {
+  if (countdown > 0) {
+    codeButtonText.value = `${countdown}s`
+    setTimeout(() => {
+      countdown--
+      updateCountdown()
+    }, 1000)
+  } else {
+    codeButtonText.value = '发送验证码'
+  }
+}
+
+async function sendCode() {
+  if (countdown > 0) return
+  if (!email.value) {
+    errorMessage.value = '请先填写邮箱'
+    return
+  }
+  const ok = await authStore.sendRegisterEmail(email.value)
+  if (ok) {
+    countdown = 60
+    updateCountdown()
+  }
+}
+
+async function handleRegister() {
   // Reset error message
   errorMessage.value = ''
 
@@ -134,11 +181,11 @@ function handleRegister() {
   }
 
   // Attempt registration
-  const success = authStore.register({
+  const success = await authStore.register({
     username: username.value,
     email: email.value,
     password: password.value,
-    campus: campus.value
+    code: code.value
   })
 
   if (success) {
@@ -273,5 +320,16 @@ select.form-input {
   background-color: rgba(239, 68, 68, 0.1);
   border-radius: var(--radius-md);
   text-align: center;
+}
+
+.code-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.code-btn {
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
 }
 </style>
