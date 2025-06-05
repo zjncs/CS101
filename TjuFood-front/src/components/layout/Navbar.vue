@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <router-link to="/" class="navbar-logo">
-        <img src="/logo.png" alt="Logo" class="logo-img" />
+        <img src="/ranking_tju-master/programe/WebFront/src/assets/logo.png" alt="Logo" class="logo-img" />
         <span class="logo-text">天津大学美食社区</span>
       </router-link>
 
