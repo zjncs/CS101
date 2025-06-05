@@ -70,17 +70,21 @@ const password = ref('')
 const remember = ref(false)
 const errorMessage = ref('')
 
-function handleLogin() {
-  if (username.value && password.value) {
-    const success = authStore.login(username.value, password.value)
-
-    if (success) {
-      router.push('/')
-    } else {
-      errorMessage.value = '用户名或密码错误'
-    }
-  } else {
+async function handleLogin() {
+  errorMessage.value = ''
+  if (!username.value || !password.value) {
     errorMessage.value = '请输入用户名和密码'
+    return
+  }
+  const success = await authStore.login(
+    username.value,
+    password.value,
+    remember.value
+  )
+  if (success) {
+    router.push('/')
+  } else {
+    errorMessage.value = '用户名或密码错误'
   }
 }
 </script>
