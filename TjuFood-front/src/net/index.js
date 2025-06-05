@@ -1,32 +1,37 @@
-import axios from "axios";
-import {ElMessage} from "element-plus";
+import axios from 'axios'
 
-const defaultError = () => ElMessage.error('发生了一些错误，请联系管理员')
-const defaultFailure = (message) => ElMessage.warning(message)
-
-function post(url, data, success, failure = defaultFailure, error = defaultError) {
-    axios.post(url, data, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        withCredentials: true
-    }).then(({data}) => {
-        if(data.success)
-            success(data.message, data.status)
-        else
-            failure(data.message, data.status)
-    }).catch(error)
+function post(url, data) {
+  return axios
+    .post(url, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+    .then(({ data }) => {
+      if (data.success) return data.message
+      throw new Error(data.message)
+    })
 }
 
-function get(url, success, failure = defaultFailure, error = defaultError) {
-    axios.get(url, {
-        withCredentials: true
-    }).then(({data}) => {
-        if(data.success)
-            success(data.message, data.status)
-        else
-            failure(data.message, data.status)
-    }).catch(error)
+function postForm(url, data) {
+  const params = new URLSearchParams()
+  Object.keys(data).forEach((k) => params.append(k, data[k]))
+  return axios
+    .post(url, params, { withCredentials: true })
+    .then(({ data }) => {
+      if (data.success) return data.message
+      throw new Error(data.message)
+    })
 }
 
-export { get, post }
+function get(url) {
+  return axios
+    .get(url, { withCredentials: true })
+    .then(({ data }) => {
+      if (data.success) return data.message
+      throw new Error(data.message)
+    })
+}
+
+export { get, post, postForm }
