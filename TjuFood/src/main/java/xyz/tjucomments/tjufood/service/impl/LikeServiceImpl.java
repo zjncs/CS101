@@ -23,4 +23,14 @@ public class LikeServiceImpl implements LikeService {
     public List<Like> listByTarget(long likedId, int type) {
         return mapper.findByTarget(likedId, type);
     }
+
+    @Override
+    public boolean addLike(Like like) {
+        return mapper.insert(like) > 0;
+    }
+
+    @Override
+    public boolean removeLike(long userId, long likedId, int type) {
+        return mapper.delete(userId, likedId, type) > 0;
+    }
 }

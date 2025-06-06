@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface FollowService {
     List<Follow> listByUser(long userId);
+    boolean addFollow(Follow follow);
+    boolean removeFollow(long userId, long followUserId);
 }

@@ -23,4 +23,9 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> listByReview(long reviewId) {
         return mapper.findByReview(reviewId);
     }
+
+    @Override
+    public boolean createComment(Comment comment) {
+        return mapper.insert(comment) > 0;
+    }
 }

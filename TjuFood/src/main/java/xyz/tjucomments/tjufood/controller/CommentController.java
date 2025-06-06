@@ -1,10 +1,7 @@
 package xyz.tjucomments.tjufood.controller;
 
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xyz.tjucomments.tjufood.entity.Comment;
 import xyz.tjucomments.tjufood.entity.RestBean;
 import xyz.tjucomments.tjufood.service.CommentService;
@@ -26,5 +23,14 @@ public class CommentController {
     @GetMapping("/review/{reviewId}")
     public RestBean<List<Comment>> listReviewComments(@PathVariable long reviewId) {
         return RestBean.success(service.listByReview(reviewId));
+    }
+
+    @PostMapping("/add")
+    public RestBean<String> createComment(@RequestBody Comment comment) {
+        comment.setLiked(0);
+        comment.setStatus(0);
+        if(service.createComment(comment))
+            return RestBean.success("ok");
+        return RestBean.failure(500, "fail");
     }
 }

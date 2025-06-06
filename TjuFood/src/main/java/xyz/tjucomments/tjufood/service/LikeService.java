@@ -7,4 +7,6 @@ import java.util.List;
 public interface LikeService {
     List<Like> listByUser(long userId);
     List<Like> listByTarget(long likedId, int type);
+    boolean addLike(Like like);
+    boolean removeLike(long userId, long likedId, int type);
 }

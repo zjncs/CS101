@@ -7,4 +7,5 @@ import java.util.List;
 public interface CommentService {
     List<Comment> listByBlog(long blogId);
     List<Comment> listByReview(long reviewId);
+    boolean createComment(Comment comment);
 }

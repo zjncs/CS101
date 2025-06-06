@@ -23,4 +23,9 @@ public class BlogServiceImpl implements BlogService {
     public Blog getById(long id) {
         return mapper.findById(id);
     }
+
+    @Override
+    public boolean createBlog(Blog blog) {
+        return mapper.insert(blog) > 0;
+    }
 }
