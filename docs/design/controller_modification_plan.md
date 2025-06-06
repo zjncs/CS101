@@ -90,3 +90,6 @@ Below are example REST endpoints for newly introduced modules. These follow the 
 - `GET /api/comment/review/{reviewId}` – List top-level comments under a review.
 
 These basic endpoints demonstrate read-only access. Additional POST or PUT routes can be added later for creating new blogs, reviews and comments with authentication checks.
+
+### MessageController
+- `GET /api/message/user/{userId}` – List the latest messages received by the user.
