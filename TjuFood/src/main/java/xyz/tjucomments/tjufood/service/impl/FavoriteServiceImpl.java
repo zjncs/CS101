@@ -18,4 +18,14 @@ public class FavoriteServiceImpl implements FavoriteService {
     public List<Favorite> listByUser(long userId) {
         return mapper.findByUser(userId);
     }
+
+    @Override
+    public boolean addFavorite(Favorite favorite) {
+        return mapper.insert(favorite) > 0;
+    }
+
+    @Override
+    public boolean removeFavorite(long userId, long favoriteId, int type) {
+        return mapper.delete(userId, favoriteId, type) > 0;
+    }
 }

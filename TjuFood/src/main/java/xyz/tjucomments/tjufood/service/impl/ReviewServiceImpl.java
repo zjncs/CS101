@@ -23,4 +23,9 @@ public class ReviewServiceImpl implements ReviewService {
     public Review getById(long id) {
         return mapper.findById(id);
     }
+
+    @Override
+    public boolean createReview(Review review) {
+        return mapper.insert(review) > 0;
+    }
 }

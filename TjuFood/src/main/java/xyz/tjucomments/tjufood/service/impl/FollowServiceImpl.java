@@ -18,4 +18,14 @@ public class FollowServiceImpl implements FollowService {
     public List<Follow> listByUser(long userId) {
         return mapper.findByUser(userId);
     }
+
+    @Override
+    public boolean addFollow(Follow follow) {
+        return mapper.insert(follow) > 0;
+    }
+
+    @Override
+    public boolean removeFollow(long userId, long followUserId) {
+        return mapper.delete(userId, followUserId) > 0;
+    }
 }
