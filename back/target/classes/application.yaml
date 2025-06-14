@@ -1,0 +1,76 @@
+# 服务器相关配置
+server:
+  port: 8090
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+# Spring Boot 应用配置
+spring:
+  # 数据源配置 (SQL Server)
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=tju_food3;encrypt=true;trustServerCertificate=true;
+    username: Yu_Xinqiang
+    password: 20050413yu
+
+  # 邮箱发送配置 (QQ邮箱)
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 2651701064@qq.com
+    password: fowvlpgoclimdjdd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+  # Redis 配置 (已采纳新的配置项路径)
+  data:
+    redis:
+      # 数据库索引，默认为0
+      database: 0
+      # 连接到虚拟机中的Redis
+      host: 192.168.92.128
+      # Redis默认端口
+      port: 6379
+      # Redis服务本身没有设置密码，此行已注释。
+      # password:
+      # 连接超时时间
+      timeout: 5000ms
+
+# MyBatis 配置
+mybatis:
+  # (关键) 指定 Mapper XML 文件的位置
+  mapper-locations: classpath*:mapper/*.xml
+  # (推荐) 为实体类起别名，方便在XML中使用
+  type-aliases-package: xyz.tjucomments.tjufood.entity
+  # (推荐) 开启驼峰命名自动转换（例如，数据库的 user_name 字段会自动映射到 Java 的 userName 属性）
+  configuration:
+    map-underscore-to-camel-case: true
+
+# SpringDoc API 文档配置
+springdoc:
+  api-docs:
+    path: /api-docs # API json 文件的访问路径
+  swagger-ui:
+    path: /swagger-ui.html # Swagger UI 页面的访问路径
+  # API 文档的基本信息
+  info:
+    title: TjuFood 项目 API 文档
+    description: 一个为天津大学学生提供食堂菜品点评与分享的平台 API
+    version: v1.0.0
+    contact:
+      name: "您的姓名"
+      email: "您的邮箱@example.com"
+      url: "https://tju.edu.cn" # 您的项目或个人链接
+
+# 项目自定义配置
+tjufood:
+  image-upload-dir: D:/lesson/nginx-1.18.0/html/tjufood/imgs/

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.tjucomments.tjufood.mapper.CanteenMapper">
+
+    <!--【保留】查询食堂列表，因为涉及多表连接(tb_campus, tb_canteen_type)以获取DTO所需字段 -->
+    <select id="listCanteens" resultType="xyz.tjucomments.tjufood.dto.CanteenDTO">
+        SELECT c.*, ca.name as campusName, ct.name as typeName
+        FROM tb_canteen c
+                 LEFT JOIN tb_campus ca ON c.campus_id = ca.id
+                 LEFT JOIN tb_canteen_type ct ON c.type_id = ct.id
+        ORDER BY c.id
+    </select>
+
+    <!--【保留】根据ID查询单个食堂详情，同样因为涉及多表连接 -->
+    <select id="queryCanteenById" resultType="xyz.tjucomments.tjufood.dto.CanteenDTO">
+        SELECT c.*, ca.name as campusName, ct.name as typeName
+        FROM tb_canteen c
+                 LEFT JOIN tb_campus ca ON c.campus_id = ca.id
+                 LEFT JOIN tb_canteen_type ct ON c.type_id = ct.id
+        WHERE c.id = #{id}
+    </select>
+
+    <!--
+        【已移除】以下SQL已被MyBatis-Plus的BaseMapper替代:
+        - insertCanteen     -> 由 baseMapper.insert() 替代
+        - updateCanteen     -> 由 baseMapper.updateById() 替代
+        - deleteCanteen     -> 由 baseMapper.deleteById() 替代
+    -->
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.tjucomments.tjufood.mapper.StallMapper">
+
+    <!--【保留】根据ID查询窗口详情，需要连接 canteen 表获取食堂名称 -->
+    <select id="queryStallById" resultType="xyz.tjucomments.tjufood.dto.StallDTO">
+        SELECT s.*, c.name as canteenName FROM tb_stall s LEFT JOIN tb_canteen c ON s.canteen_id = c.id WHERE s.id = #{id}
+    </select>
+
+    <!--【保留】根据食堂ID查询窗口列表，同样需要连接 canteen 表 -->
+    <select id="listStallsByCanteenId" resultType="xyz.tjucomments.tjufood.dto.StallDTO">
+        SELECT s.*, c.name as canteenName FROM tb_stall s LEFT JOIN tb_canteen c ON s.canteen_id = c.id WHERE s.canteen_id = #{canteenId} ORDER BY s.location
+    </select>
+
+    <!--
+        【已移除】以下SQL已被MyBatis-Plus的BaseMapper替代:
+        - insertStall     -> 由 baseMapper.insert() 替代
+        - updateStall     -> 由 baseMapper.updateById() 替代
+        - deleteStall     -> 由 baseMapper.deleteById() 替代
+    -->
+</mapper>
