@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="97edc32b-ac0d-4a73-bc9b-5bf288254b38" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TJUcomments-zjn66.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminview/src/views/layout/components/Sidebar/SidebarItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/adminview/src/views/layout/components/Sidebar/SidebarItem.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/config/MvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/config/MvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/dto/LoginFormDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/dto/LoginFormDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/dto/RegisterFormDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/dto/RegisterFormDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/utils/auth/LoginInterceptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/utils/auth/RefreshTokenInterceptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/utils/auth/UserHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/target/surefire-reports/TEST-xyz.tjucomments.tjufood.AdminPasswordGeneratorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back/target/surefire-reports/TEST-xyz.tjucomments.tjufood.AdminPasswordGeneratorTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/target/surefire-reports/TEST-xyz.tjucomments.tjufood.RedisConnectionTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back/target/surefire-reports/TEST-xyz.tjucomments.tjufood.RedisConnectionTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/target/surefire-reports/TEST-xyz.tjucomments.tjufood.TjuFoodApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back/target/surefire-reports/TEST-xyz.tjucomments.tjufood.TjuFoodApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/target/surefire-reports/xyz.tjucomments.tjufood.AdminPasswordGeneratorTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/back/target/surefire-reports/xyz.tjucomments.tjufood.AdminPasswordGeneratorTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/target/surefire-reports/xyz.tjucomments.tjufood.RedisConnectionTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/back/target/surefire-reports/xyz.tjucomments.tjufood.RedisConnectionTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/target/surefire-reports/xyz.tjucomments.tjufood.TjuFoodApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/back/target/surefire-reports/xyz.tjucomments.tjufood.TjuFoodApplicationTests.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,27 +32,45 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tju-yxq&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zjncs/TJUcomments.git&quot;,
+    &quot;accountId&quot;: &quot;b5c50c60-8eb4-4d49-90a4-47e256308d23&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2yVN3zYWz7E7GP8mgp86FM3zAZu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDK&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\IntelliJ IDEA 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -58,6 +88,8 @@
       <option name="presentableId" value="Default" />
       <updated>1749915588199</updated>
       <workItem from="1749915589193" duration="251000" />
+      <workItem from="1749915878268" duration="2395000" />
+      <workItem from="1749967609225" duration="107000" />
     </task>
     <servers />
   </component>
