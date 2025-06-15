@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.tjucomments.tjufood.dto.*;
@@ -21,8 +22,8 @@ import xyz.tjucomments.tjufood.entity.User;
 import xyz.tjucomments.tjufood.mapper.UserMapper;
 import xyz.tjucomments.tjufood.service.IUserService;
 import xyz.tjucomments.tjufood.utils.constants.RedisConstants;
-import xyz.tjucomments.tjufood.utils.security.PasswordEncoder;
 import xyz.tjucomments.tjufood.utils.validation.RegexUtils;
+
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -32,17 +33,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Resource
     private StringRedisTemplate stringRedisTemplate;
     @Resource
-    private PasswordEncoder passwordEncoder;
-    @Resource
     private JavaMailSender mailSender;
+    @Resource
+    private PasswordEncoder passwordEncoder; // 注入BCrypt加密器
+
     @Value("${spring.mail.username}")
     private String fromEmail;
+
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    // baseMapper (即 UserMapper) 已由 ServiceImpl 自动注入
 
     @Override
     public Result sendCode(SendCodeDTO sendCodeDTO) {
-        // ... (前半段图形验证码逻辑不变)
+        // 图形验证码逻辑
         String captchaKey = RedisConstants.CAPTCHA_CODE_KEY + sendCodeDTO.getCaptchaKey();
         String cachedCaptcha = stringRedisTemplate.opsForValue().get(captchaKey);
         stringRedisTemplate.delete(captchaKey);
@@ -56,13 +58,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.fail("邮箱格式不正确！");
         }
 
-        // 【重构】使用 getOne 替代 queryByEmail
         User user = getOne(new QueryWrapper<User>().eq("email", email));
 
         if (type == 0 && user != null) return Result.fail("该邮箱已被注册！");
         if (type == 2 && user == null) return Result.fail("该邮箱未注册！");
 
-        // ... (后半段发送邮件逻辑不变)
+        // 发送邮件验证码逻辑
         String code = RandomUtil.randomNumbers(6);
         String emailCodeKey = RedisConstants.LOGIN_CODE_KEY + type + ":" + email;
         stringRedisTemplate.opsForValue().set(emailCodeKey, code, RedisConstants.LOGIN_CODE_TTL, TimeUnit.MINUTES);
@@ -79,15 +80,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     @Transactional
     public Result register(RegisterFormDTO registerForm) {
-        // ... (前半段校验逻辑不变)
+        // 注册校验逻辑
         if (!registerForm.getPassword().equals(registerForm.getConfirmPassword())) {
             return Result.fail("两次输入的密码不一致！");
         }
+
         if (RegexUtils.isCodeInvalid(registerForm.getCode())) {
             return Result.fail("验证码格式错误！");
         }
 
-        // 【重构】使用 count 替代 queryByEmail != null
         long count = count(new QueryWrapper<User>().eq("email", registerForm.getEmail()));
         if(count > 0){
             return Result.fail("该邮箱已被注册！");
@@ -99,6 +100,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.fail("邮箱验证码错误！");
         }
 
+        // 创建用户
         User user = new User();
         user.setEmail(registerForm.getEmail());
         user.setPassword(passwordEncoder.encode(registerForm.getPassword()));
@@ -106,7 +108,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         user.setGender(registerForm.getGender());
         user.setCampus(registerForm.getCampus());
 
-        // 【重构】使用 save 替代 insertUser
         try {
             save(user);
         } catch (Exception e) {
@@ -121,8 +122,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public Result login(LoginFormDTO loginForm) {
         User user;
+        // 【注意】此处的 .getAccount() 调用现在是正确的，因为 LoginFormDTO 已包含 account 字段
         String account = loginForm.getAccount();
-        // 【重构】使用 MP 方法进行查询
+
+        // 根据账号是邮箱还是ID进行查询
         if (account.contains("@")) {
             user = getOne(new QueryWrapper<User>().eq("email", account));
         } else {
@@ -133,10 +136,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             }
         }
 
+        // 使用BCrypt比对密码
         if (user == null || !passwordEncoder.matches(loginForm.getPassword(), user.getPassword())) {
             return Result.fail("用户名或密码错误！");
         }
-        // ... (后半段Token逻辑不变)
+
+        // 生成Token并存入Redis
         String token = UUID.randomUUID().toString(true);
         UserDTO userDTO = BeanUtil.copyProperties(user, UserDTO.class);
         try {
@@ -152,6 +157,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public Result resetPassword(PasswordResetDTO resetForm) {
+        // 重置密码逻辑
         String key = RedisConstants.LOGIN_CODE_KEY + "2:" + resetForm.getEmail();
         String cachedCode = stringRedisTemplate.opsForValue().get(key);
         if (cachedCode == null || !cachedCode.equals(resetForm.getCode())) {
@@ -159,7 +165,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         String newPassword = passwordEncoder.encode(resetForm.getNewPassword());
 
-        // 【保持不变】调用自定义XML方法
+        // 这里假设您的 mapper 中有 updatePasswordByEmail 方法
         baseMapper.updatePasswordByEmail(resetForm.getEmail(), newPassword);
 
         stringRedisTemplate.delete(key);
